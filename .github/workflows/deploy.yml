@@ -1,0 +1,45 @@
+name: CI/CD for Next.js App
+
+on:
+  push:
+    branches:
+      - main        # Триггер для продакшен-развертывания
+      - development # Триггер для девелопмент-развертывания
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        environment: [development, production]
+
+    steps:
+      # Шаг 1: Клонирование кода из репозитория
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Шаг 2: Установка Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      # Шаг 3: Установка зависимостей
+      - name: Install dependencies
+        run: npm install
+
+      # Шаг 4: Сборка приложения
+      - name: Build the application
+        env:
+          NODE_ENV: ${{ matrix.environment }}
+        run: npm run build
+
+      # Шаг 5: Развертывание на Vercel
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${thA1xVShZKeMdlfUbQHohBr6}
+          VERCEL_PROJECT_ID: ${ prj_siHmEbpqSeSZmcHvmvYp9KUFVQgg }
+          VERCEL_ORG_ID: ${ GYX8ulwD5KushHwPGWZnWwwM }
+        run: |
+          npx vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID
