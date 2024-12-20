@@ -31,8 +31,7 @@ jobs:
 
       # Шаг 4: Сборка приложения
       - name: Build the application
-        env:
-          NODE_ENV: development
+        
         run: npm run build
 
       # Шаг 5: Развертывание на Vercel
