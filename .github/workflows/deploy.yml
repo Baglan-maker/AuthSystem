@@ -37,8 +37,8 @@ jobs:
       # Шаг 5: Развертывание на Vercel
       - name: Deploy to Vercel
         env:
-          VERCEL_TOKEN: ${thA1xVShZKeMdlfUbQHohBr6}
-          VERCEL_PROJECT_ID: ${ prj_siHmEbpqSeSZmcHvmvYp9KUFVQgg }
-          VERCEL_ORG_ID: ${ GYX8ulwD5KushHwPGWZnWwwM }
+          VERCEL_TOKEN: thA1xVShZKeMdlfUbQHohBr6
+          VERCEL_PROJECT_ID: prj_siHmEbpqSeSZmcHvmvYp9KUFVQgg
+          VERCEL_ORG_ID: GYX8ulwD5KushHwPGWZnWwwM
         run: |
           npx vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID
